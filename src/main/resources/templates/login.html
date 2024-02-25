@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+    <style type="text/css">
+        html,body{
+            width:100%;
+            height:100%
+        }
+        body{
+            margin:0;padding:0;border:0;
+            font-family: 'Open Sans', sans-serif;
+            background: url("../static/images/bg4.jpg") no-repeat 0px 0px;
+            background-size: 100%;
+        }
+        h1 {
+            font-family: 'Exo 2', sans-serif;
+            text-align: center;
+            padding-top: 2em;
+            font-weight: 400;
+            color: #2B2B36;
+            font-size: 2em;
+        }
+        label{
+            color: #9199aa;
+            font-size: 17px;
+            margin-right: 30px;
+        }
+        .msg{
+            width: 100%;
+            height: 40px;
+            margin-top: 35px;
+        }
+        .signup input{
+            width: 100%;
+            height: 70.4px;
+            font-size: 30px;
+            color: #fff;
+            outline: none;
+            border: none;
+            background: #3ea751;
+            padding: 18px 0;
+            cursor: pointer;
+            border-bottom: 1px solid #2b2b36;
+        }
+        .signup input:hover{
+            background: #ff2775;
+        }
+        .signin input{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../static/js/vendor/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+    window.onload = function(){
+        if (${repassword != null}){
+            alert("${repassword}");
+        }
+    }
+</script>
+<!--SIGN UP-->
+<h1>图书管理系统</h1>
+<div class="login-form">
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"> </div>
+    <div class="avtar">
+        <img src="../static/images/avtar1.jpg" style="border-radius: 79px; width: 79px; width: 79px;"/>
+    </div>
+    <form method="post" th:action="@{/login}">
+        <input type="text" name="username" placeholder="&nbsp;请&nbsp;输&nbsp;入&nbsp;账&nbsp;号">
+        <input type="password" name="password" placeholder="&nbsp;请&nbsp;输&nbsp;入&nbsp;密&nbsp;码">
+        <br>
+        <select  class="flag" name="flag">
+            <option value="1">读者</option>
+            <option value="0">管理员</option>
+        </select></br>
+        <div class="msg">
+            <label th:text="${msg}"></label>
+            <label th:text="${UnLogin}"></label>
+        </div>
+        <div class="signin">
+            <input type="submit" value="登录" >
+        </div>
+    </form>
+</div>
+</body>
+</html>

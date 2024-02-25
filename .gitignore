@@ -1,0 +1,7 @@
+.idea
+*.iml
+/**/apollo/
+/**/target/
+*.log
+*.gz
+*.tmp

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>图书管理系统</title>
+    <meta name="description" content="AppUI is a Web App Bootstrap Admin Template created by pixelcave and published on Themeforest">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="../../../static/img/favicon.png">
+    <link rel="apple-touch-icon" href="../../../static/img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="../../../static/img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="../../../static/img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="../../../static/img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="../../../static/img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="../../../static/img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="../../../static/img/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="../../../static/img/icon180.png" sizes="180x180">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../static/css/plugins.css">
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/themes.css">
+    <script src="../../../static/js/vendor/modernizr-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="page-wrapper" class="page-loading">
+    <div class="preloader">
+        <div class="inner">
+            <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
+            <h3 class="text-primary visible-lt-ie10"><strong>Loading../..</strong></h3>
+        </div>
+    </div>
+    <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
+        <div id="sidebar">
+            <div id="sidebar-brand" class="themed-background">
+                <a href="" class="sidebar-title">
+                    <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide">图书管理系统</span>
+                </a>
+            </div>
+            <div id="sidebar-scroll">
+                <!-- Sidebar Content -->
+                <div class="sidebar-content">
+                    <!-- Sidebar Navigation -->
+                    <ul class="sidebar-nav">
+                        <li>
+                            <a th:href="@{/index(id=${user.id})}"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">首页</span></a>
+                        </li>
+                        <li class="sidebar-separator">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </li>
+                        <li class=" active">
+                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-rocket sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">图书管理</span></a>
+                            <ul >
+                                <li>
+                                    <a th:href="@{/book/toAddBook(id=${user.id})}" class=" active">添加图书</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/book/selectAll(current=1,id=${user.id})}">图书管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li >
+                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-airplane sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">人员管理</span></a>
+                            <ul>
+                                <li>
+                                    <a th:href="@{/user/toAddUser(id=${user.id})}" >添加人员</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/user/selectAll(uid=${user.id},current=1)}">人员管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a th:href="@{/lend/select1(id=${user.id},current=1)}"><i class="gi gi-inbox sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">借还管理</span></a>
+                        </li>
+                        <li>
+                            <a th:href="@{/user/toPwd(id=${user.id})}"><i class="gi gi-inbox sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">密码修改</span></a>
+                        </li>
+                    </ul>
+                    <!-- END Sidebar Navigation -->
+                </div>
+                <!-- END Sidebar Content -->
+            </div>
+            <!-- END Wrapper for scrolling functionality -->
+
+            <!-- Sidebar Extra Info -->
+            <div id="sidebar-extra-info" class="sidebar-content sidebar-nav-mini-hide">
+
+                <div class="progress progress-mini push-bit">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div class="text-center">
+                    <small>Crafted with <i class="fa fa-heart text-danger"></i> by <a href="#" target="_blank">码蚁科技</a></small><br>
+                    <small><span>2022-12</span> &copy; <a href="#">寻码网</a></small>
+                </div>
+            </div>
+            <!-- END Sidebar Extra Info -->
+        </div>
+        <!-- END Main Sidebar -->
+
+        <!-- Main Container -->
+        <div id="main-container">
+
+            <header class="navbar navbar-inverse navbar-fixed-top">
+                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+                    <!-- Main Sidebar Toggle Button -->
+                    <li>
+                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                            <i class="fa fa-ellipsis-v fa-fw animation-fadeInRight" id="sidebar-toggle-mini"></i>
+                            <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
+                        </a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href=""><strong>WELCOME</strong></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav-custom pull-right">
+                    <!-- User Dropdown -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../../../static/img/0.jpg" alt="avatar" style="border-style: none;">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">
+                                <strong th:text="${user.name}"></strong>
+                            </li>
+                            <li>
+                                <a th:href="@{/user/toPwd(id=${user.id})}" onclick="App.sidebar('toggle-sidebar-alt');">
+                                    <i class="gi gi-settings fa-fw pull-right"></i>
+                                    修改密码
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/toLock(id=${user.id})}">
+                                    <i class="gi gi-lock fa-fw pull-right"></i>
+                                    锁屏
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/}">
+                                    <i class="fa fa-power-off fa-fw pull-right"></i>
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END User Dropdown -->
+                </ul>
+                <!-- END Right Header Navigation -->
+            </header>
+            <!-- END Header -->
+            <div style="background-color:#fff;width: auto;height: 900px;padding-top: 30px;" >
+                <!--main-->
+                <!--<div id="header"></div>-->
+                <div class="col-xs-6 col-md-offset-3" style="padding-top: 50px;position: relative">
+                    <form th:action="@{/book/addBook(id=${user.id})}" method="post" id="addBook">
+                        <div class="panel panel-primary" style="border-color: #5ccdde;">
+                            <div class="panel-heading" style="background-color: #5ccdde;border-color: #5ccdde;">
+                                <h3 class="panel-title">添加图书</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">图书名</span>
+                                    <input type="text" class="form-control" name="name" id="name" >
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">作者</span>
+                                    <input type="text" class="form-control" name="author" id="author" placeholder="请输入作者名">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span  class="input-group-addon">出版社</span>
+                                    <input type="text" class="form-control" name="publish" id="publish" placeholder="请输入出版社">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span  class="input-group-addon">ISBN</span>
+                                    <input type="text" class="form-control" name="isbn" id="ISBN" placeholder="请输入ISBN">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span  class="input-group-addon">简介</span>
+                                    <textarea class="form-control" rows="3" name="introduction" id="introduction"
+                                              placeholder="请输入简介"></textarea>
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span  class="input-group-addon">语言</span>
+                                    <input type="text" class="form-control" name="language" id="language" placeholder="请输入语言">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">价格</span>
+                                    <input type="text" class="form-control" name="price" id="price" placeholder="请输入价格">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">出版日期</span>
+                                    <input type="date" class="form-control" name="pubDate" id="puDate" placeholder="请输入出版日期">
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">分类</span>
+                                    <select class="form-control" name="classId">
+                                        <option >--请选择--</option>
+                                        <option th:each="dict:${classes}" th:value="${dict.classId}" th:text="${dict.className}">
+
+                                    </select>
+                                </div>
+                                <div class="input-group" style="padding-top: 20px;">
+                                    <span class="input-group-addon">数量</span>
+                                    <input type="text" class="form-control" name="number" id="number" placeholder="请输入图书数量">
+                                </div>
+                                <ul class="pager">
+                                    <li><a href="#" onclick="document.getElementById('addBook').submit();return false;">添加</a></li>
+                                    <li><a href="#" onclick="javascript:history.back(-1);">返回</a></li>
+                                </ul>
+                                <em id="tishi" style="color: red" th:text="${msg}"></em>
+                                <script>
+                                    $("#addBook").submit(function () {
+                                        if ($("#name").val() == '' || $("#author").val() == '' || $("#publish").val() == '' || $("#isbn").val() == '' || $("#introduction").val() == '' || $("#language").val() == '' || $("#price").val() == '' || $("#pubstr").val() == '' || $("#classId").val() == '' || $("#pressmark").val() == '' || $("#number").val() == '') {
+                                            alert("请填入完整图书信息！");
+                                            return false;
+                                        }
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- END Main Container -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../../../static/js/vendor/jquery-2.2.4.min.js"></script>
+<script src="../../../static/js/vendor/bootstrap.min.js"></script>
+<script src="../../../static/js/plugins.js"></script>
+<script src="../../../static/js/app.js"></script>
+<script src="../../../static/js/pages/readyDashboard.js"></script>
+<script>$(function(){ ReadyDashboard.init(); });</script>
+<script type="text/javascript">
+    window.onload = function(){
+        if (${info != null}){
+            alert("${info}");
+        }
+    }
+</script>
+</body>
+</html>

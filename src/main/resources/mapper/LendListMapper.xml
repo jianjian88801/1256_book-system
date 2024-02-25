@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunmaw.book.mapper.LendListMapper">
+    <resultMap id="LendList" type="com.xunmaw.book.entity.LendList">
+        <id column="ser_num" property="serNum"/>
+        <result column="book_id" property="bookId"/>
+        <result column="reader_id" property="readerId"/>
+        <result column="lend_date" property="lendDate"/>
+        <result column="back_date" property="backDate"/>
+        <result column="flag" property="flag"/>
+        <result column="lossflag" property="lossflag"/>
+        <result column="loss_date" property="lossDate"/>
+        <result column="pay_date" property="payDate"/>
+        <collection property="bookInfo" ofType="com.xunmaw.book.entity.BookInfo">
+            <id column="book_id" property="bookId"/>
+            <result column="name" property="name"/>
+            <result column="author" property="author"/>
+            <result column="publish" property="publish"/>
+            <result column="isbn" property="isbn"/>
+            <result column="introduction" property="introduction"/>
+            <result column="language" property="language"/>
+            <result column="price" property="price"/>
+            <result column="pub_date" property="pubDate"/>
+            <result column="class_id" property="classId"/>
+            <result column="number" property="number"/>
+        </collection>
+    </resultMap>
+    <update id="update1">
+        update lend_list set lossflag=1,loss_date=#{date} where ser_num=#{serNum}
+    </update>
+    <update id="update2">
+        update lend_list set lossflag=0,loss_date=null where ser_num=#{serNum}
+    </update>
+    <update id="update3">
+        update lend_list set flag=1,lossflag=2,pay_date=#{date},back_date=#{date} where ser_num=#{serNum}
+    </update>
+    <update id="update4">
+        update lend_list set flag=1,lossflag=0,back_date=#{date} where ser_num=#{serNum}
+    </update>
+    <update id="updateDate">
+        update lend_list set back_date=#{date1} where ser_num=#{serNum}
+    </update>
+    <update id="updateFlag">
+        update lend_list set flag=2 where ser_num=#{serNum}
+    </update>
+    <update id="updateFlag2">
+        update lend_list set flag=0 where ser_num=#{serNum}
+    </update>
+    <update id="updateOne">
+        update lend_list set flag=3 where ser_num=#{serNum}
+    </update>
+    <select id="selectByReader" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and reader_id = #{id} and flag != 1 and lossflag != 2
+    </select>
+    <select id="selectByReader2" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and reader_id = #{id} and (flag = 1 or lossflag = 2)
+    </select>
+    <select id="selectByReader3" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and reader_id = #{id} and flag != 1 and lossflag = 1
+    </select>
+    <select id="getDate" resultType="java.util.Date">
+        select back_date from lend_list where ser_num = #{serNum}
+    </select>
+    <select id="select1" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id
+    </select>
+    <select id="select2" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and lend_list.flag = #{x}
+    </select>
+    <select id="select3" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and book_info.name = #{y}
+    </select>
+    <select id="select4" resultMap="LendList">
+        select * from lend_list,book_info where lend_list.book_id = book_info.book_id and lend_list.flag = #{x} and book_info.name = #{y}
+    </select>
+</mapper>
