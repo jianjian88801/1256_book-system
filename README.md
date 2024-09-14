@@ -1,6 +1,5 @@
 # Springboot图书管理系统
 
-##  联系不到我，就看我的主页 
  
 #### 介绍
 本系统为采用Springboot + Mysql + MybatisPlus+Thymeleaf技术架构开发的单端电脑端图书管理系统。该系统有两个登入身份、共8个功能模块（修改密码为共用模块）
